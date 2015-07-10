@@ -11,7 +11,7 @@ class View
             extract($data);
         }
         */
-        include 'application/views/'.$content_view;
+        
         include 'application/views/template/'.$template_view;
     }
 }
