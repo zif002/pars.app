@@ -6,9 +6,18 @@ class Route
         // контроллер и действие по умолчанию
         $controller_name = 'Main';
         $action_name = 'index';
+        $request_uri = $_SERVER['REQUEST_URI'];
+        //Костыль для vk
+        $char = "?";
+        $char_pos = strpos(  $request_uri, $char);
+        $code_type = substr( $request_uri,$char_pos);
+        //echo $code_type."<br>";
+        $routes = substr( $request_uri,0,$char_pos);
+        $routes = explode('/', $routes);    
         
-        $routes = explode('/', $_SERVER['REQUEST_URI']);
-
+        
+        
+        
         // получаем имя контроллера
         if ( !empty($routes[1]) )
         {	
@@ -48,6 +57,7 @@ class Route
             правильно было бы кинуть здесь исключение,
             но для упрощения сразу сделаем редирект на страницу 404
             */
+           echo "<h1>Такой страницы не существует</h1>";
             Route::ErrorPage404();
         }
         
@@ -63,7 +73,9 @@ class Route
         else
         {
             // здесь также разумнее было бы кинуть исключение
+            
             Route::ErrorPage404();
+
         }
     
     }

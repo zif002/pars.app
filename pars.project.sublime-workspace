@@ -1,0 +1,868 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"pa",
+				"padding"
+			],
+			[
+				"tex",
+				"text-transform"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"top",
+				"top-publish"
+			],
+			[
+				"border",
+				"border-radius"
+			],
+			[
+				"text",
+				"text-transform"
+			],
+			[
+				"body",
+				"body_news"
+			],
+			[
+				"title",
+				"title_news"
+			],
+			[
+				"c",
+				"c_text"
+			],
+			[
+				"c_",
+				"c_link_hover"
+			],
+			[
+				"last",
+				"last-child"
+			],
+			[
+				"li",
+				"lighten"
+			],
+			[
+				"back",
+				"background"
+			],
+			[
+				"la",
+				"last-child"
+			],
+			[
+				"pos",
+				"position"
+			],
+			[
+				"light",
+				"lighten"
+			],
+			[
+				"bac",
+				"background"
+			],
+			[
+				"b",
+				"btn_full"
+			],
+			[
+				"new",
+				"news"
+			],
+			[
+				"ligh",
+				"lighten"
+			],
+			[
+				"padding",
+				"padding-bottom"
+			],
+			[
+				"lig",
+				"lighten"
+			],
+			[
+				"bg",
+				"cont_bg"
+			],
+			[
+				"btn",
+				"btn_full"
+			],
+			[
+				"te",
+				"text-align"
+			],
+			[
+				"l",
+				"lside"
+			],
+			[
+				"ba",
+				"background-position"
+			],
+			[
+				"color",
+				"color_link_hover"
+			],
+			[
+				"s",
+				"switch	switch …"
+			],
+			[
+				"ini",
+				"ini_get"
+			],
+			[
+				"set",
+				"setlocale"
+			],
+			[
+				"str",
+				"strftime"
+			],
+			[
+				"fon",
+				"font-family"
+			],
+			[
+				"a",
+				"absolute"
+			],
+			[
+				"border-",
+				"border-color"
+			],
+			[
+				"for",
+				"foreach	foreach …"
+			],
+			[
+				"req",
+				"require_once"
+			],
+			[
+				"line",
+				"line-height"
+			],
+			[
+				"cate",
+				"category"
+			],
+			[
+				"txt",
+				"text-decoration"
+			],
+			[
+				"borde",
+				"border-radius"
+			],
+			[
+				"min",
+				"min-width"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"late",
+				"latest_results  (variable)"
+			],
+			[
+				"img",
+				"imgExt"
+			],
+			[
+				"res",
+				"resize  (function)"
+			],
+			[
+				"err",
+				"error"
+			],
+			[
+				"slide",
+				"slideDown  (function)"
+			],
+			[
+				"con",
+				"console"
+			],
+			[
+				"fo",
+				"foreach	foreach …"
+			],
+			[
+				"file_",
+				"file_get_contents"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"cur",
+				"cursor"
+			],
+			[
+				"f",
+				"first-child  (pseudo-class)"
+			],
+			[
+				"font-",
+				"font-size"
+			],
+			[
+				"border-ra",
+				"border-radius"
+			],
+			[
+				"border-b",
+				"border-bottom-right-radius:   (property)"
+			],
+			[
+				"bor",
+				"border-top"
+			],
+			[
+				"max-",
+				"max-width"
+			],
+			[
+				"z-",
+				"z-index"
+			],
+			[
+				"str_",
+				"str_replace"
+			],
+			[
+				"fade",
+				"fadeToggle  (function)"
+			],
+			[
+				"sli",
+				"slideUp  (function)"
+			],
+			[
+				"un",
+				"unique  (function)"
+			],
+			[
+				"obj",
+				"obj1"
+			],
+			[
+				"parse",
+				"parseInt  (function)"
+			],
+			[
+				"border-bottom",
+				"border-bottom-left-radius"
+			],
+			[
+				"border-top",
+				"border-top-left-radius"
+			],
+			[
+				"z",
+				"z-index"
+			],
+			[
+				"ta",
+				"table"
+			],
+			[
+				"fad",
+				"fadeOut"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"ab",
+				"absolute"
+			],
+			[
+				"di",
+				"display"
+			],
+			[
+				"marg",
+				"margin"
+			],
+			[
+				"le",
+				"left"
+			],
+			[
+				"list",
+				"list-style"
+			],
+			[
+				"els",
+				"elseif	elseif"
+			],
+			[
+				"fl",
+				"float"
+			],
+			[
+				"im",
+				"images/"
+			],
+			[
+				"u",
+				"url()"
+			],
+			[
+				"mysq",
+				"mysql_query"
+			],
+			[
+				"mysql_s",
+				"mysql_select_db"
+			],
+			[
+				"mysql",
+				"mysql_connect"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"p",
+				"pencl.png	w:16 h:16"
+			],
+			[
+				"i",
+				"images/"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"d",
+				"decimal-leading-zero"
+			],
+			[
+				"list-s",
+				"list-style-type"
+			],
+			[
+				"in",
+				"inline-block"
+			],
+			[
+				"txet",
+				"text-align"
+			],
+			[
+				"tetxt",
+				"text-decoration"
+			],
+			[
+				"search",
+				"search"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "ins",
+		"selected_items":
+		[
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: insta",
+				"Package Control: Install Package"
+			],
+			[
+				"colo",
+				"Color Picker"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: in",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 512.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"clear",
+			"сдуфк",
+			"echo $x;",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/D/web/open_server/OpenServer/domains/pars.app"
+	],
+	"file_history":
+	[
+		"/D/web/open_server/OpenServer/domains/pars.app/application/controllers/controller_portfolio.php",
+		"/D/web/open_server/OpenServer/domains/pars.app/application/views/template/main_template.php",
+		"/D/web/open_server/OpenServer/domains/pars.app/application/core/controller.php",
+		"/D/web/open_server/OpenServer/domains/pars.app/application/core/view.php",
+		"/D/web/open_server/OpenServer/domains/pars.app/application/core/route.php",
+		"/D/web/open_server/OpenServer/domains/pars.app/index.php",
+		"/D/web/open_server/OpenServer/domains/pars.app/application/bootstrap.php",
+		"/D/web/open_server/OpenServer/domains/pars.app/application/views/template/header.php",
+		"/D/web/open_server/OpenServer/domains/pars.app/application/views/main_view.php",
+		"/D/web/open_server/OpenServer/domains/pars.app/application/views/portfolio_view.php",
+		"/D/web/open_server/OpenServer/domains/pars.app/application/models/model_portfolio.php",
+		"/D/web/open_server/OpenServer/domains/pars.app/application/controllers/controller_main.php",
+		"/D/web/open_server/OpenServer/domains/pars.app/.htaccess",
+		"/D/web/open_server/OpenServer/domains/pars.app/application/core/model.php",
+		"/D/web/open_server/OpenServer/domains/pars.app/application/views/template/footer.php",
+		"/D/web/open_server/OpenServer/domains/pars.local/.git/.gitignore",
+		"/D/web/open_server/OpenServer/domains/pars.local/m5rwe43w.mat.txt",
+		"//NATALI-PC/www/Новый текстовый документ.txt",
+		"/D/web/open_server/OpenServer/domains/pars.local/platya.php",
+		"/D/web/ad_team/app/dev/all_news.jade",
+		"/D/web/ad_team/app/dev/search.jade",
+		"/D/web/ad_team/app/dev/catalog.jade",
+		"/D/web/ad_team/app/gulpfile.js",
+		"/D/web/ad_team/app/public/css/main.css",
+		"/D/web/ad_team/app/public/js/js.js",
+		"/D/web/ad_team/app/dev/stylus/main.styl",
+		"/D/web/open_server/OpenServer/domains/pars.local/happywear.php",
+		"/D/Downloads/Donloads Browser/-84177783_members (1).csv",
+		"/C/Users/front-end/AppData/Local/Temp/scp57723/www/readme.txt",
+		"/D/web/ad_team/app/dev/index.jade",
+		"/D/web/ad_team/app/dev/news_1.jade",
+		"/D/web/ad_team/app/dev/about.jade",
+		"/D/web/ad_team/app/public/css/ie8.css",
+		"/C/Users/front-end/Desktop/people.txt",
+		"/C/Users/front-end/Desktop/Новый текстовый документ.txt",
+		"/D/web/ad_team/app/public/index.html",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/D/web/open_server/OpenServer/domains/mysite.local/info.php",
+		"/D/web/test/dev/stylus/main.styl",
+		"/C/Users/front-end/AppData/Local/Temp/scp50726/b02558r6.bget.ru/public_html/templates/beez3/templateDetails.xml",
+		"/C/Windows/System32/drivers/etc/lmhosts.sam",
+		"/C/Users/front-end/AppData/Local/Temp/Rar$DIa0.599/tooltips.css",
+		"/C/Users/front-end/AppData/Local/Temp/Rar$DIa0.462/style.css",
+		"/I/home/php1.ru/www/selopt.php",
+		"/C/Users/front-end/AppData/Local/Temp/scp05623/www/houstex.ru/yandex_648feeed406c86eb.html",
+		"/C/Users/front-end/AppData/Local/Temp/scp30119/www/houstex.ru/catalog/view/theme/template-postelkin/stylesheet/stylesheet.css",
+		"/C/Users/front-end/AppData/Local/Temp/scp33071/www/houstex.ru/catalog/view/theme/template-postelkin/template/product/product.tpl",
+		"/C/Users/front-end/AppData/Local/Temp/scp29883/www/houstex.ru/catalog/view/theme/template-postelkin/stylesheet/main.css",
+		"/C/Users/front-end/AppData/Local/Temp/scp10846/www/houstex.ru/catalog/view/theme/template-postelkin/template/common/footer.tpl",
+		"/C/Users/front-end/AppData/Local/Temp/scp12979/www/gruzes.ru/index.html",
+		"/I/home/php1.ru/www/sumki_trend.php",
+		"/I/home/php1.ru/www/paltoopt.php",
+		"/C/Users/front-end/AppData/Local/Temp/scp34283/www/houstex.ru/system/library/image.php",
+		"/I/home/magazin.ru/www/system/library/image.php",
+		"/C/Users/front-end/AppData/Local/Temp/scp20804/www/houstex.ru/.htaccess",
+		"/I/home/php1.ru/www/index.html",
+		"/I/home/php1.ru/www/stile_n.php",
+		"/I/home/php1.ru/www/cookie.txt",
+		"/I/home/php1.ru/www/autoriz.php",
+		"/I/home/php1.ru/www/cherry.php",
+		"/I/home/php1.ru/www/index_kupivsem.php",
+		"/C/Users/front-end/AppData/Local/Temp/scp21506/www/gruzes.ru/obl.html",
+		"/C/Users/front-end/AppData/Local/Temp/scp21670/www/gruzes.ru/state-blog/kulture.html",
+		"/C/Users/front-end/AppData/Local/Temp/scp21959/www/gruzes.ru/state-blog/history-state.html",
+		"/C/Users/front-end/AppData/Local/Temp/scp21066/www/gruzes.ru/kontakt.html",
+		"/C/Users/front-end/AppData/Local/Temp/scp20067/www/gruzes.ru/blog.html",
+		"/C/Users/front-end/AppData/Local/Temp/scp20065/www/gruzes.ru/city.html",
+		"/C/Users/front-end/AppData/Local/Temp/scp20677/www/gruzes.ru/index.html",
+		"/C/Users/front-end/Desktop/yandex_54bc1615757db11a.txt",
+		"/I/home/php1.ru/www/shved.php",
+		"/I/home/php1.ru/www/sellegins.php",
+		"/C/Users/front-end/AppData/Local/Temp/scp32835/www/houstex.ru/catalog/view/theme/template-postelkin/template/common/header.tpl",
+		"/C/Users/front-end/AppData/Local/Temp/scp17329/www/houstex.ru/catalog/view/theme/template-postelkin/template/product/product.tpl",
+		"/C/Users/front-end/AppData/Local/Temp/scp14895/www/houstex.ru/catalog/view/theme/template-postelkin/template/module/coolfilter.tpl",
+		"/C/Users/front-end/AppData/Local/Temp/scp58921/www/houstex.ru/catalog/view/theme/template-postelkin/stylesheet/stylesheet.css",
+		"/C/Users/front-end/AppData/Local/Temp/scp36475/www/houstex.ru/catalog/view/theme/template-postelkin/stylesheet/main.css",
+		"/C/Users/front-end/AppData/Local/Temp/scp13431/www/houstex.ru/catalog/view/theme/template-postelkin/template/product/category.tpl",
+		"/C/Users/front-end/AppData/Local/Temp/scp32775/www/houstex.ru/catalog/view/theme/template-postelkin/template/module/featured.tpl",
+		"/C/Users/front-end/AppData/Local/Temp/scp48298/www/houstex.ru/admin/view/template/catalog/product_form.tpl",
+		"/C/Users/front-end/AppData/Local/Temp/scp50631/www/houstex.ru/admin/language/russian/catalog/product.php",
+		"/C/Users/front-end/AppData/Local/Temp/scp44671/www/houstex.ru/admin/controller/catalog/product.php",
+		"/C/Users/front-end/AppData/Local/Temp/scp45184/www/houstex.ru/admin/view/template/common/home.tpl",
+		"/C/Users/front-end/AppData/Local/Temp/scp00130/www/houstex.ru/catalog/language/russian/product/product.php",
+		"/D/web/Mag postel grunt/app/goods.html",
+		"/D/web/Mag postel grunt/.tmp/styles/main.css",
+		"/C/Users/front-end/AppData/Local/Temp/scp13856/www/houstex.ru/catalog/view/theme/template-postelkin/stylesheet/main.css",
+		"/I/home/php1.ru/www/happywear.php",
+		"/I/home/php1.ru/www/shouse.php",
+		"/C/Users/front-end/AppData/Local/Temp/scp57344/www/houstex.ru/catalog/view/theme/template-postelkin/stylesheet/main.css",
+		"/C/Users/front-end/AppData/Local/Temp/scp56357/www/houstex.ru/catalog/view/theme/template-postelkin/template/product/product.tpl",
+		"/I/home/php1.ru/www/kashiza.php",
+		"/C/Users/front-end/Desktop/кредит.txt",
+		"/C/Users/front-end/Desktop/Правки Остров 1503.txt",
+		"/C/Users/front-end/AppData/Local/Temp/scp56436/www/houstex.ru/catalog/view/theme/template-postelkin/template/product/product.tpl",
+		"/C/Users/front-end/AppData/Local/Temp/scp51102/www/houstex.ru/catalog/view/theme/template-postelkin/stylesheet/main.css",
+		"/C/Users/front-end/AppData/Local/Temp/scp14096/www/houstex.ru/system/library/image.php",
+		"/C/Users/front-end/AppData/Local/Temp/scp10668/www/houstex.ru/catalog/language/russian/russian.php",
+		"/C/Users/front-end/AppData/Local/Temp/scp05425/www/houstex.ru/catalog/model/catalog/product.php",
+		"/I/home/magazin.ru/www/catalog/view/theme/template-postelkin/stylesheet/main.css",
+		"/C/Users/front-end/AppData/Local/Temp/scp21020/www/houstex.ru/catalog/view/theme/template-postelkin/template/product/category.tpl",
+		"/I/home/magazin.ru/www/catalog/view/theme/template-postelkin/template/product/category.tpl",
+		"/I/home/magazin.ru/www/catalog/view/theme/template-postelkin/template/product/product.tpl",
+		"/D/web/test/public/index.js",
+		"/D/web/test/bower_components/animate.css/animate.css",
+		"/D/web/test/bower_components/animate.css/animate.min.css",
+		"/D/web/test/json.json",
+		"/D/web/test/public/index.html",
+		"/C/Users/front-end/AppData/Local/Temp/Rar$DIa0.388/layout_vanilla.jade",
+		"/C/Users/front-end/AppData/Local/Temp/Rar$DIa0.153/layout.jade",
+		"/D/web/test/bower_components/normalize/test/normalize.test.js",
+		"/D/web/test/bower_components/normalize/index.js",
+		"/D/web/test/public/css/main.css",
+		"/D/web/test/package.json",
+		"/D/web/test/gulpfile.js",
+		"/I/home/php1.ru/www/seling.php",
+		"/I/home/php1.ru/www/cheapgoods.php",
+		"/I/home/php1.ru/www/vse_pokormanu.php",
+		"/I/home/php1.ru/www/seetmarkt.php",
+		"/C/Users/front-end/AppData/Local/Temp/scp58008/www/houstex.ru/config.php",
+		"/C/Users/front-end/AppData/Local/Temp/scp21386/www/houstex.ru/catalog/controller/module/product_tab.php",
+		"/C/Users/front-end/AppData/Local/Temp/scp37442/www/houstex.ru/catalog/view/theme/template-postelkin/stylesheet/main.css",
+		"/C/Users/front-end/AppData/Local/Temp/scp01524/www/houstex.ru/admin/config.php",
+		"/C/Users/front-end/AppData/Local/Temp/scp36674/www/houstex.ru/catalog/view/theme/template-postelkin/stylesheet/stylesheet.css",
+		"/C/Users/front-end/AppData/Local/Temp/scp18213/www/houstex.ru/admin/index.php",
+		"/C/Users/front-end/AppData/Local/Temp/scp33283/www/houstex.ru/index.php",
+		"/I/home/magazin.ru/www/info.php",
+		"/C/Users/front-end/AppData/Local/Temp/scp37155/www/houstex.ru/system/database/mysqli.php",
+		"/C/Users/front-end/AppData/Local/Temp/scp37112/www/houstex.ru/system/database/mysql.php"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			");",
+			"table",
+			"li:first-child:before",
+			"2f3738",
+			"0083c8",
+			"8fcae9",
+			"c_text",
+			"25px",
+			"icon_gamepad",
+			"cont_color",
+			"color_title",
+			"color_text",
+			"color_link_hover",
+			"int",
+			"0",
+			"134px",
+			"left",
+			"55",
+			"block",
+			"){\n",
+			"border1",
+			"5px",
+			"                            \n",
+			"44",
+			"	\n",
+			"]-->\n",
+			"findpages",
+			"tab-links",
+			">\";\n",
+			"?>      ",
+			"btn_add-to-cart",
+			"description",
+			"price",
+			"description",
+			"formStyler",
+			"colorbox",
+			"image",
+			"colorbox",
+			"р.",
+			"price",
+			"image",
+			"){\n",
+			"182px",
+			"Обучение",
+			"b3b3b3",
+			"35px",
+			";	",
+			"find",
+			"url",
+			"Войти",
+			"1118",
+			" \n",
+			"end ",
+			"$end ",
+			"$send",
+			"forgotten",
+			"parent",
+			"$(this).siblings",
+			".coolfilter-item-checkbox input:",
+			"20",
+			"			 // echo $a->href.'<br>';",
+			";\n",
+			"/?",
+			"console",
+			"           \n",
+			"();\n",
+			"blue",
+			"');",
+			"vodolazki",
+			"3",
+			"60",
+			"width-1100",
+			"captionOrange",
+			"block_3",
+			"1",
+			"$container-lg",
+			"$container-large-desktop",
+			"1100",
+			"center",
+			"\n<?",
+			"displaybutton",
+			"//Inputs",
+			"$",
+			"jQuery",
+			"$(function()",
+			"$(function() {",
+			"script",
+			" $",
+			"addToCart",
+			"			\n",
+			"Droid",
+			"twbs-font-path",
+			"bootstrap-sass-asset-helper",
+			"			\n",
+			"  echo '<pre>';\n			  print_r($a);\n			  echo '</pre>';",
+			"product-title",
+			"$i",
+			">';\n",
+			"=\"'.$",
+			"header",
+			"<pre",
+			"<pre>",
+			"pre>",
+			"pre",
+			"fac",
+			"add",
+			"      \n",
+			"				}",
+			"foreach ($categories as $category) {",
+			"($results as $result) ",
+			"foreach ($results as $result) ",
+			"foreach ($results as $result) {",
+			"'name'  => $result['name'] .",
+			"'name'  => $result['name'] . ' (' . $product_total . ')',",
+			"foreach ($results as $result",
+			"wishlist",
+			"$agree",
+			"agree",
+			"$\\agree",
+			"wishlist",
+			"price",
+			"name",
+			"cart add_to-cart",
+			"!!!!<",
+			"description",
+			"full_descr",
+			"cart",
+			"full_descr"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"goods",
+			"$ER",
+			"jq",
+			"jQuery",
+			"/home/u515122175/public_html/",
+			"/home/u515122175/public_html",
+			"http://houstex.esy.es/",
+			"content_center",
+			".img",
+			"$c-black",
+			"$c-text_gray",
+			"$c-border_btn",
+			"$w-static",
+			"$white",
+			"$orange",
+			"a",
+			"page-diorStyle-diorCatalog",
+			"page-chanelStyle-chanelCatalog",
+			"url(../image",
+			"4",
+			"3",
+			"li",
+			"class=\"goods\" id=\"good\""
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 30.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.sftp":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "pars.project.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"main.css",
+				"www\\catalog\\view\\theme\\template-postelkin\\stylesheet\\main.css"
+			],
+			[
+				"main.js",
+				"app\\scripts\\main.js"
+			],
+			[
+				"",
+				"www\\catalog\\view\\theme\\template-postelkin\\template\\product\\manufacturer_list.tpl"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 270.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
