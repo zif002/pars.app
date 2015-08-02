@@ -1,38 +1,34 @@
 <?
 
-//Подключение к базе данных
 
-class Database{
-    private $host      = 'localhost';
-    private $user      = 'root';
-    private $pass      = '';
-    private $dbname    = 'pars';
- 
-    private $dbh;
-    private $error;
- 
-    public function __construct(){
-        // Set DSN
-        $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
-        // Set options
-        $options = array(
-            PDO::ATTR_PERSISTENT    => true,
-            PDO::ATTR_ERRMODE       => PDO::ERRMODE_EXCEPTION
-        );
-        // Create a new PDO instanace
-        try{
-            $this->dbh = new PDO($dsn, $this->user, $this->pass, $options);
-        }
-        // Catch any errors
-        catch(PDOException $e){
-            $this->error = $e->getMessage();
-        }
-      
+class DB {
+    private $host = "localhost";
+    private $dbname = "pars";
+    private $user = "admin";
+    private $pass = "1111";
+    
+   
+    public $db;
+
+    public function __construct() {
+      try {   
+        $this->db = new PDO ("mysql:host=".$this->host.";dbname=".$this->dbname,$this->user,$this->pass);
+        
+        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->db->exec("set names utf8");
+        //echo "ok";
+      } catch (PDOException $e) {
+        echo "<span style='color:red;font-size:24px;padding10px;border:5px solid red;'>Failed to get DB handle: " . $e->getMessage() . "</span>\n";
+       
+      }
     }
-       public function getDb() {
-       		if ($this->db instanceof PDO) {
-           	 return $this->dbh;
-      	 }
- 		}
+
 }
+
+
+
+
+
+
+
 

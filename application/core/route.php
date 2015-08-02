@@ -7,27 +7,31 @@ class Route
         $controller_name = 'Main';
         $action_name = 'index';
         $request_uri = $_SERVER['REQUEST_URI'];
+   
         //Костыль для vk
         $char = "?";
         $char_pos = strpos(  $request_uri, $char);
-        $code_type = substr( $request_uri,$char_pos);
-        //echo $code_type."<br>";
-        $routes = substr( $request_uri,0,$char_pos);
-        $routes = explode('/', $routes);    
+        if ($char_pos === false){
         
-        
-        
-        
+             $routes = explode('/', $request_uri);    
+         }else{
+            $code_type = substr( $request_uri,$char_pos);   
+            $routes = substr( $request_uri,0,$char_pos);
+            $routes = explode('/', $routes);    
+         }
+         //print_r($routes);
         // получаем имя контроллера
         if ( !empty($routes[1]) )
         {	
             $controller_name = $routes[1];
+           // echo $controller_name;
         }
         
         // получаем имя экшена
         if ( !empty($routes[2]) )
         {
             $action_name = $routes[2];
+           // echo $action__name;
         }
 
         // добавляем префиксы
@@ -38,10 +42,13 @@ class Route
         // подцепляем файл с классом модели (файла модели может и не быть)
 
         $model_file = strtolower($model_name).'.php';
+        //echo $model_file;
         $model_path = "application/models/".$model_file;
         if(file_exists($model_path))
         {
             include "application/models/".$model_file;
+            // echo "application/models/".$model_file;
+
         }
 
         // подцепляем файл с классом контроллера
@@ -50,6 +57,7 @@ class Route
         if(file_exists($controller_path))
         {
             include "application/controllers/".$controller_file;
+            //echo "application/controllers/".$controller_file;
         }
         else
         {

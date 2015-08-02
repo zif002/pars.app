@@ -1,6 +1,8 @@
 <?
+
 class Model_VK extends Model
 {
+    
 
     public function get_data()
     {	
@@ -19,4 +21,15 @@ class Model_VK extends Model
             // todo
         );
     }
+    public function set_data($data){
+       
+        $pdoStatement = $db->prepare('SELECT * FROM `users` WHERE `id_vk`=:id1');
+
+        $pdoStatement->bindParam(':id1', $data['vk_id']);
+        $pdoStatement->execute();
+        print_r( $pdoStatement->fetchAll());
+
+    }
+
 }
+

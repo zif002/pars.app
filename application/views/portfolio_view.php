@@ -9,7 +9,7 @@
     {
         echo '<tr><td>'.$row['Year'].'</td><td>'.$row['Site'].'</td><td>'.$row['Description'].'</td></tr>';
     }
-    
+     echo $access_token."<br>";
 ?>
 </table>
 </p>
