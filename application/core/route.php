@@ -83,6 +83,7 @@ class Route
             // здесь также разумнее было бы кинуть исключение
             
             Route::ErrorPage404();
+            echo false;
 
         }
     

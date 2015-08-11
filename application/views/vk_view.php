@@ -11,17 +11,18 @@ static $VK_APP_ID = "4976017";
 static $VK_SECRET_CODE = "7SUe2GWNds2mXPRWAuRN";
 
 
-if(!empty($_GET['code'])) {
+
   $code = $_GET['code'];
   //переменные в сессии
-  if (!isset($_SESSION['access_token']))
-  {
-    $data = $vk->get_data_acsess_token($VK_APP_ID,$VK_SECRET_CODE,$code); 
+  if (!isset($_SESSION['access_token'])){
+ 
+   $data = $vk->get_data_acsess_token($VK_APP_ID,$VK_SECRET_CODE,$code);  
+  $_SESSION['access_token'] =  $data['access_token'] ;
+  $_SESSION['vk_id'] = $data['user_id']  ; 
+  }
+  $access_token =  $_SESSION['access_token'];
+  $vk_id =  $_SESSION['vk_id'];
   
-  $access_token =  $data['access_token'] ;
-  $vk_id = $data['user_id']  ; 
-    $_SESSION['access_token'] = $access_token;
-    $_SESSION['vk_id'] = $vk_id;
    // echo  $_SESSION['access_token'];
     $res = file_get_contents("https://api.vk.com/method/users.get?uids=".$vk_id."&access_token=".$access_token."&fields=uid,first_name,last_name,nickname,photo"); 
     $data = json_decode($res, true);
@@ -45,15 +46,17 @@ if(!empty($_GET['code'])) {
       'ip'          => $ip,
       'access_token'=> $access_token
     );
-    //$save_user->save($data); 
-  }else{
-    echo$_SESSION['access_token']."<br>";
+
+  //}else{
+    //echo$_SESSION['access_token']."<br>";
     $_SESSION['vk_id']."<br>";
-    echo $vk_id;
+    //echo $vk_id;
     $access_token=$_SESSION['access_token'];
+    $res = $save_user->save($data);
+    print_r($res); 
     
 
-  }
+  //}
 
 
 // обращаемся к ВК Api, получаем имя, фамилию и ID пользователя вконтакте
@@ -65,15 +68,8 @@ if(!empty($_GET['code'])) {
     
 
 
-  function get_server($access_token,$album_id=216306417,$group_id=84177783){
-      $res1 = file_get_contents("https://api.vk.com/method/photos.getUploadServer?album_id=$album_id&group_id=$group_id&access_token={$access_token}"); 
-      $server_upload_uri = json_decode($res1, true);
-
-      $server = $server_upload_uri['response']['upload_url'];
-      return $server;
-  }
-  $server = get_server($access_token);
-  //echo $server."<br>";
+ 
+ 
   $post = array( 
     "file1"=>"@".dirname(__FILE__)."/image/1.jpg",
     "file2"=>"@".dirname(__FILE__)."/image/2.jpg",
@@ -85,59 +81,13 @@ if(!empty($_GET['code'])) {
     "desc3"=>"test3",
   );
   //print_r($post);
-  function save_photo($server,$post,$access_token,$album_id=216306417,$group_id=84177783){
-  
-    $ch = curl_init($server);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);  
-    curl_setopt($ch, CURLOPT_POSTFIELDS,  $post);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: multipart/form-data; charset=UTF-8'));
-    $json = json_decode(curl_exec($ch));
-    //print_r($json);
-    curl_close($ch);
-    $hash = $json->hash;
-    $photos_list = $json ->photos_list;
-    //print_r($photos_list);
-    $server_to_save = $json->server;
-    //echo $server_to_save."<br>" ;   
-    $res2 = file_get_contents("https://api.vk.com/method/photos.save?album_id=$album_id&group_id=$group_id&server={$server_to_save}&photos_list={$photos_list}&hash={$hash}&access_token={$access_token}"); 
-    $rezult = json_decode($res2, true);
-    echo "<pre>";
-   // print_r($rezult);
-    echo "</pre>";
-    $success_save = $rezult['response'];
-    $photo_id;
-    if(is_array($success_save)){
-      foreach ($success_save as $key => $value) {
-        $photo_id[] = $value['pid']."<br>";
-      }
-    }
-    return $photo_id;
-    
+  //$vk->save_photo($captions,$post,$access_token);
+  $file_list = $vk->get_list_pareser();
+  foreach ($file_list as $key => $value) {
+    echo "<a href='{$value}'>$value</a>";
   }
-  function photo_caption_edit($arr,$captions,$access_token,$group_id=84177783){
-    $count = count($arr);
-    foreach ($arr as $key => $value) {
-      foreach ($captions as $key1 => $value1) {
-        if(strlen($count) == 1)
+ 
   
-        $value = (int)$value;
-        $data = file_get_contents("https://api.vk.com/method/photos.edit?photo_id={$value}&owner_id=-$group_id&caption={$captions[$value1]}&access_token={$access_token}");
-        //print_r($data);
-     
-            }
-        
-    }
-
-   
-    $success = json_decode($data, true);
-    return $success;
-
-  } 
-  $photo_id = save_photo($server,$post,$access_token);
-  print_r($photo_id);
-
-  photo_caption_edit($photo_id,$captions,$access_token);
    
 
   
@@ -182,7 +132,7 @@ $albums_list = get_albums_list($vk_id);
         }
   echo "</select>";
 
-}
+
 ?>
 
 
