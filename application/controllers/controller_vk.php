@@ -37,6 +37,13 @@ class Controller_VK extends Controller
     }
     //Сохранение фото в альбом
     function save_photo($captions,$files,$access_token,$album_id=216306417,$group_id=84177783){
+        echo "!!true!!";
+        echo "<pre>";
+        echo print_r($captions);
+        echo "</pre>";
+        //   echo "<pre>";
+        // echo print_r($files);
+        // echo "</pre>";
         //Получение url сервера
         $res1 = file_get_contents("https://api.vk.com/method/photos.getUploadServer?album_id=$album_id&group_id=$group_id&access_token={$access_token}"); 
         $server_upload_uri = json_decode($res1, true);
@@ -72,27 +79,31 @@ class Controller_VK extends Controller
         
         //Сливка двух массивоов с id фото и описания
         //Добавлеоние а альбом
-        $photo_array = array_combine($photos_id, $captions);  
-        foreach ($photo_array as $photo_id => $value) {       
-            $photo_id = (int)$photo_id;
-            $data = file_get_contents("https://api.vk.com/method/photos.edit?photo_id={$photo_id}&owner_id=-$group_id&caption={$value}&access_token={$access_token}");
-            print_r($data);
-         //print_r($data);
+        if(isset($captions)){
+            $photo_array = array_combine($photos_id, $captions);  
+            foreach ($photo_array as $photo_id => $value) {       
+                $photo_id = (int)$photo_id;
+                $data = file_get_contents("https://api.vk.com/method/photos.edit?photo_id={$photo_id}&owner_id=-$group_id&caption={$value}&access_token={$access_token}");
+                print_r($data);
+             //print_r($data);
+            }
+        }else{
+            echo "не приходят $captions and $photos_id";
         }
         
     }
-    function get_list_pareser(){
-        $dir = scandir("application/list_parser");
-        //print_r($entries); 
-        $filelist = [];
-        foreach($dir as $files) {  
-            if ($files != '.' && $files != '..'){      
-                $filelist[] = $files;
-            }
+    // function get_list_pareser(){
+    //     $dir = scandir("application/list_parser");
+    //     //print_r($entries); 
+    //     $filelist = [];
+    //     foreach($dir as $files) {  
+    //         if ($files != '.' && $files != '..'){      
+    //             $filelist[] = $files;
+    //         }
          
-        }
-        return $filelist;
-    }
+    //     }
+    //     return $filelist;
+    // }
 
     
    

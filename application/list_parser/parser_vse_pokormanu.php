@@ -1,15 +1,14 @@
 
 
 
-<div id="counter">0</div><!--progressbar-->
+
 <?
-set_time_limit(0); // это для того чтобы скрипт не отвалился через 30 секунд, если вддруг попадется медленный сайт донор
-require_once '../lib/simple_html_dom.php';
-require_once '../lib/short_url.php';
+// это для того чтобы скрипт не отвалился через 30 секунд, если вддруг попадется медленный сайт донор
 
 
 
-function getBigImage($url,$i){
+function getBigImage($url,$i=1,$captions){
+	//echo $url."<br>";
 	$ch = curl_init();  
 	curl_setopt($ch, CURLOPT_URL, $url); 
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -23,7 +22,8 @@ function getBigImage($url,$i){
 	// echo "</pre>";
 	echo "Товар № ".$i."<br>";
 	$url = shortUrl($url);
-	echo $url->id."<br>";
+	$url = $url->id;
+	echo $url."<br>";
 	// находим фото
 
 
@@ -33,7 +33,7 @@ function getBigImage($url,$i){
 		 foreach($data->find('#zoom1') as $img){		
 			//echo $img->href;
 		 	if( !preg_match('#^http://#',$img->href) )$img->href = 'http://sankt_peterburg.vsepokarmanu.ru'.$img->href;
-			file_put_contents( 'data2/'.$i++.'.jpg', file_get_contents($img->href));
+			file_put_contents( 'application/views/image/'.$i++.'.jpg', file_get_contents($img->href));
 		 	 // сохраняем в файл			
 		 }
 		// if( !preg_match('#^http://#',$img->src) )$img->src = 'http://sankt_peterburg.vsepokarmanu.ru'.$img->src;
@@ -43,7 +43,8 @@ function getBigImage($url,$i){
 	//Вывод названия товара
 	if( count($data->find('h1')) ){
 		$product_title = $data->find('h1',0);
-		echo  $product_title->plaintext."<br>";	
+		$product_title = $product_title->plaintext;
+		echo  trim($product_title)."<br>";	
 		// foreach ($data->find('.product-page-content h1') as $product_title) {
 		// 	// echo "<pre>";
 		// 	// print_r($product_title);
@@ -57,8 +58,10 @@ function getBigImage($url,$i){
 	 }
 	//Вывод ,бренда
 	 if( count($data->find('#artnumber')) ){
-	 	foreach ($data->find('#artnumber') as $article){	 	
-	 		echo  "Артикул :".$article->plaintext."<br>";
+	 	$aritcle;
+	 	foreach ($data->find('#artnumber') as $article){
+	 		$article = $article->plaintext;
+	 		echo  "Артикул :".trim($article)."<br>";
 	 	}
 	 }else{
 	
@@ -70,7 +73,8 @@ function getBigImage($url,$i){
 	 	// foreach($data->find('span#our_price_display_red') as $price2) {	
 	 		
 	 	// }
-	 	echo  'Цена'.$price2->plaintext."<br>";	 
+	 	$price2 = $price2->plaintext;
+	 	echo  'Цена'.trim($price2)."<br>";	 
 	 }else{			
 	 
 	 }
@@ -78,8 +82,10 @@ function getBigImage($url,$i){
 	  //вывод состав
 	 
 	 if( count($data->find('#ls0')) ){
-	 	foreach($data->find('#ls0 ul li') as $size) {	  	
-	  		echo $size->plaintext." ";
+	 	trim($size);
+	 	foreach($data->find('#ls0 ul li') as $size) {
+	 		$size = $size->plaintext;
+	  		echo $size;
 	  	}	
 		echo '<br>';
 		
@@ -90,7 +96,7 @@ function getBigImage($url,$i){
 
 
 	 //   Вывод описания
-	  if(count($data->find('.product-description'))){
+	if(count($data->find('.product-description'))){
 	  	$str="";
 	  	foreach($data->find('.product-description') as $descript) {	  	
 	  		$str1 = $descript->plaintext;
@@ -108,14 +114,19 @@ function getBigImage($url,$i){
 	 }
 	 //Конец 
 	 echo "<br><br>";
-
+	$temp_captions =$url."\r\n".$product_title."\r\n".$size."\r\n".$price2."\r\n".$article."\r\n";
+	//print_r($temp_captions);
 	
+	
+	return $temp_captions;
 	$data->clear();// подчищаем за собой
 	unset($data);
+
 }
 
-function getYandexImages($url,$findpages = true){
-	global $i,$n;
+function getYandexImages($url,$findpages = true,$i=1,$n=3){
+
+	
 	
 	// загружаем данный URL
 	$ch = curl_init();  
@@ -127,32 +138,46 @@ function getYandexImages($url,$findpages = true){
 	
 
 	$data = str_get_html($data);
-
+	
 	// очищаем страницу от лишних данных, это не обязательно, но когда HTML сильно захламлен бывает удобно почистить его, для дальнейшего анализа
 foreach($data->find('script,link,comment') as $tmp)$tmp->outertext = '';
 
 	 // echo "<pre>";
 	 // print_r($price2);
 	 // echo "</pre>";
+	//echo count($data->find('.box a.item'))."<br>";
 	//находим URL страниц только для первого вызова функции
 	if( $findpages and count($data->find('.box a.item'))){
+	
+		$captions = array();
 		foreach($data->find('.box a.item') as $a){	
-			 // echo $a->href.'<br>';
+			//echo $n."<br>";
+			 //echo count($a).'<br>';
 			// довольно распространенный случай - локальный URL. Поэтому иногда url надо дополнять до полного
 			if( !preg_match('#^http://#',$a->href) )$a->href = 'http://sankt_peterburg.vsepokarmanu.ru'.$a->href;
 			// и еще дна тонкость, &amp; надо заменять на &
 			$a->href = str_replace('&amp;','&',$a->href);
-			 //echo $a->href.'<br>';
+			// echo $a->href.'<br>';
 			// вызываем функцию для каждой страницы
 		
 			getYandexImages($a->href,false);
-			getBigImage($a->href,$i);
+			
+			$temp_captions = getBigImage($a->href,$i,$captions);
+			//echo $temp_captions."<br>";
+			$captions[] = $temp_captions;
+			print_r($captions);
+			
+			//echo "32<br>";
 			if($i++>=$n)exit; // завершаем работу если скачали достаточно фотографий
 			// этакий progressbar, будет показывать сколько фотографий уже загружено
-			echo '<script>document.getElementById("counter").innerHTML = "Загружено: '.$i.' из '.$n.' фото";</script>';
+			//echo '<script>document.getElementById("counter").innerHTML = "Загружено: '.$i.' из '.$n.' фото";</script>';
 			flush();
 		}
-	}	
+		print_r($captions);
+
+	}
+
+	
 	
 	// находим все изображения на странице, а точнее ссылки на них
 	// if(count($data->find('a.product-title'))){
@@ -170,9 +195,13 @@ foreach($data->find('script,link,comment') as $tmp)$tmp->outertext = '';
 	// }
 	$data->clear();// подчищаем за собой
 	unset($data);
+	print_r($captions);
+	return $captions;
 }
 // очищение папки 
-
+// echo "<pre>";
+// print_r($captions);
+// echo "<pre>";
 function myscandir($dir)
 {
     $list = scandir($dir);
@@ -202,16 +231,20 @@ function clear_dir($dir)
 
 // поисковый URL
 
-$i = 1;
-$n = 200;
+
 if (isset($_POST['link'])) {
 
+	$i=1;
+	$n=200;
 	$url =	$_POST['link'] ;
-	clear_dir('data2/');
-	getYandexImages($url);
+	clear_dir('application/views/image/');
+	$captions = getYandexImages($url);
+	print_r($captions);
 }
 
 
 
-?>
+
+
+
 

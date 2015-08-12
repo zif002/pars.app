@@ -1,4 +1,18 @@
+<?
+      
+ if ($_GET['type']) {
+    switch ($_GET['type']) {
+      case 1:
+        require_once('application/list_parser/parser_vse_pokormanu.php');        
+      break;  
+    }
+  }
 
+?>
+<form action="vk?type=1" method="post">
+  <input type="text" name="link">
+  <button>Парсить</button>
+</form>
 <?
 
 // подклчение класса users
@@ -9,7 +23,6 @@ $vk = new Controller_VK();
 //var_dump($save_user);
 static $VK_APP_ID = "4976017";
 static $VK_SECRET_CODE = "7SUe2GWNds2mXPRWAuRN";
-
 
 
   $code = $_GET['code'];
@@ -31,9 +44,9 @@ static $VK_SECRET_CODE = "7SUe2GWNds2mXPRWAuRN";
   // echo "</pre>";
  
   $user_info = $data['response'][0]; 
-   echo "<pre>";
-  //echo true;
-  echo "</pre>";
+  //  echo "<pre>";
+  // //echo true;
+  // echo "</pre>";
   $first_name = $user_info['first_name'];
   $last_name  = $user_info['last_name'];
   $vk_id = $user_info['uid'];
@@ -53,7 +66,7 @@ static $VK_SECRET_CODE = "7SUe2GWNds2mXPRWAuRN";
     //echo $vk_id;
     $access_token=$_SESSION['access_token'];
     $res = $save_user->save($data);
-    print_r($res); 
+    //print_r($res); 
     
 
   //}
@@ -65,27 +78,45 @@ static $VK_SECRET_CODE = "7SUe2GWNds2mXPRWAuRN";
 // 
   
   // echo $user_info['first_name']." ".$user_info['last_name']."</br>";
-    
 
-
- 
- 
-  $post = array( 
-    "file1"=>"@".dirname(__FILE__)."/image/1.jpg",
-    "file2"=>"@".dirname(__FILE__)."/image/2.jpg",
-    "file3"=>"@".dirname(__FILE__)."/image/3.jpg",
-  );
-  $captions = array( 
-    "desc1"=>"test1",
-    "desc2"=>"test2",
-    "desc3"=>"test3",
-  );
-  //print_r($post);
-  //$vk->save_photo($captions,$post,$access_token);
-  $file_list = $vk->get_list_pareser();
-  foreach ($file_list as $key => $value) {
-    echo "<a href='{$value}'>$value</a>";
+function get_photos(){
+  //echo "!!!1!!";
+  $photo = scandir('application/views/image/');
+  //print_r($photo);
+  $photo = array_filter(scandir('application/views/image/'), function($photo) {
+    return !is_dir('application/views/image/'.$photo);
+    });
+  $i=1;
+  foreach($photo as $photos){
+        
+        $photos_arr[$i++] = $photos; 
   }
+     //print_r($photos_arr);
+  foreach ($photos_arr as $key => $value) {
+
+     $photos_ids['file'.$key] = "@".dirname(__FILE__)."\image\\".$value;
+  }
+    // print_r($photos_arr);
+  return $photos_ids;
+}
+ $files = get_photos();
+
+  //print_r($files);
+
+ 
+ 
+  //print_r($post);
+  
+        echo "<pre>";
+        echo print_r($captions);
+        echo "</pre>";
+        // echo "<pre>";
+        // echo print_r($files);
+        // echo "</pre>";
+
+$vk->save_photo($captions,$files,$access_token);
+echo "<a href='vk?type=1'>Все по корману</a>";
+
  
   
    
