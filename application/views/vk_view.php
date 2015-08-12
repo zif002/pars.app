@@ -1,5 +1,5 @@
 <?
-      
+  
  if ($_GET['type']) {
     switch ($_GET['type']) {
       case 1:
@@ -8,12 +8,9 @@
     }
   }
 
-?>
-<form action="vk?type=1" method="post">
-  <input type="text" name="link">
-  <button>Парсить</button>
-</form>
-<?
+
+
+
 
 // подклчение класса users
 $save_user = new Users();
@@ -79,42 +76,6 @@ static $VK_SECRET_CODE = "7SUe2GWNds2mXPRWAuRN";
   
   // echo $user_info['first_name']." ".$user_info['last_name']."</br>";
 
-function get_photos(){
-  //echo "!!!1!!";
-  $photo = scandir('application/views/image/');
-  //print_r($photo);
-  $photo = array_filter(scandir('application/views/image/'), function($photo) {
-    return !is_dir('application/views/image/'.$photo);
-    });
-  $i=1;
-  foreach($photo as $photos){
-        
-        $photos_arr[$i++] = $photos; 
-  }
-     //print_r($photos_arr);
-  foreach ($photos_arr as $key => $value) {
-
-     $photos_ids['file'.$key] = "@".dirname(__FILE__)."\image\\".$value;
-  }
-    // print_r($photos_arr);
-  return $photos_ids;
-}
- $files = get_photos();
-
-  //print_r($files);
-
- 
- 
-  //print_r($post);
-  
-        echo "<pre>";
-        echo print_r($captions);
-        echo "</pre>";
-        // echo "<pre>";
-        // echo print_r($files);
-        // echo "</pre>";
-
-$vk->save_photo($captions,$files,$access_token);
 echo "<a href='vk?type=1'>Все по корману</a>";
 
  
@@ -162,7 +123,30 @@ $albums_list = get_albums_list($vk_id);
             echo "<option id={$key['gid']}>{$key['name']}</option>";       
         }
   echo "</select>";
+function get_photos(){
+  //echo "!!!1!!";
+  $photo = scandir('application/views/image/');
+  //print_r($photo);
+  $photo = array_filter(scandir('application/views/image/'), function($photo) {
+    return !is_dir('application/views/image/'.$photo);
+    });
+  $i=1;
+  foreach($photo as $photos){
+        
+        $photos_arr[$i++] = $photos; 
+  }
+     //print_r($photos_arr);
+  foreach ($photos_arr as $key => $value) {
 
+     $photos_ids['file'.$key] = "@".dirname(__FILE__)."\image\\".$value;
+  }
+    // print_r($photos_arr);
+  return $photos_ids;
+}
+//print_r($captions);
+$files = get_photos();
+//print_r($files);
+$vk->save_photo($files,$captions,$access_token);
 
 ?>
 

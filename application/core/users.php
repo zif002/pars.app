@@ -11,7 +11,7 @@ class Users  extends DB{
     
     
     while($res = $query1->fetch(PDO::FETCH_ASSOC)){
-      print_r($res);
+     // print_r($res);
         if($res['id_vk'] == $data['vk_id']){
            return false;
         }

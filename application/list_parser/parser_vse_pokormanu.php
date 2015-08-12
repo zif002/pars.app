@@ -3,11 +3,13 @@
 
 
 <?
+$vk = new Controller_VK();
 // это для того чтобы скрипт не отвалился через 30 секунд, если вддруг попадется медленный сайт донор
+ $access_token = $_SESSION['access_token'];
+require_once('application/core/core_parser.php');
 
 
-
-function getBigImage($url,$i=1,$captions){
+function getBigImage($url,$i=1){
 	//echo $url."<br>";
 	$ch = curl_init();  
 	curl_setopt($ch, CURLOPT_URL, $url); 
@@ -85,7 +87,7 @@ function getBigImage($url,$i=1,$captions){
 	 	trim($size);
 	 	foreach($data->find('#ls0 ul li') as $size) {
 	 		$size = $size->plaintext;
-	  		echo $size;
+	  		echo $size." ";
 	  	}	
 		echo '<br>';
 		
@@ -114,7 +116,8 @@ function getBigImage($url,$i=1,$captions){
 	 }
 	 //Конец 
 	 echo "<br><br>";
-	$temp_captions =$url."\r\n".$product_title."\r\n".$size."\r\n".$price2."\r\n".$article."\r\n";
+	//$temp_captions ="$url$product_title$size$price2$article";
+	$temp_captions = $product_title.$url.$article.$price2.$size;
 	//print_r($temp_captions);
 	
 	
@@ -147,9 +150,10 @@ foreach($data->find('script,link,comment') as $tmp)$tmp->outertext = '';
 	 // echo "</pre>";
 	//echo count($data->find('.box a.item'))."<br>";
 	//находим URL страниц только для первого вызова функции
+
 	if( $findpages and count($data->find('.box a.item'))){
 	
-		$captions = array();
+		$captions;
 		foreach($data->find('.box a.item') as $a){	
 			//echo $n."<br>";
 			 //echo count($a).'<br>';
@@ -162,20 +166,24 @@ foreach($data->find('script,link,comment') as $tmp)$tmp->outertext = '';
 		
 			getYandexImages($a->href,false);
 			
-			$temp_captions = getBigImage($a->href,$i,$captions);
+			$temp_captions = getBigImage($a->href,$i);
 			//echo $temp_captions."<br>";
 			$captions[] = $temp_captions;
-			print_r($captions);
+
+
+			//print_r($captions);
 			
 			//echo "32<br>";
-			if($i++>=$n)exit; // завершаем работу если скачали достаточно фотографий
+			if($i++>=$n) return $captions; // завершаем работу если скачали достаточно фотографий
 			// этакий progressbar, будет показывать сколько фотографий уже загружено
 			//echo '<script>document.getElementById("counter").innerHTML = "Загружено: '.$i.' из '.$n.' фото";</script>';
-			flush();
+		
 		}
-		print_r($captions);
+
+		
 
 	}
+
 
 	
 	
@@ -195,8 +203,8 @@ foreach($data->find('script,link,comment') as $tmp)$tmp->outertext = '';
 	// }
 	$data->clear();// подчищаем за собой
 	unset($data);
-	print_r($captions);
-	return $captions;
+	//print_r($captions);
+	
 }
 // очищение папки 
 // echo "<pre>";
@@ -228,6 +236,10 @@ function clear_dir($dir)
     }
 }
 
+$files = get_photos();
+//print_r($files);
+print_r($captions);
+
 
 // поисковый URL
 
@@ -239,8 +251,10 @@ if (isset($_POST['link'])) {
 	$url =	$_POST['link'] ;
 	clear_dir('application/views/image/');
 	$captions = getYandexImages($url);
-	print_r($captions);
+	//print_r($captions);
 }
+
+
 
 
 
