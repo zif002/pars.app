@@ -4,4 +4,5 @@
 	<meta charset="UTF-8">
 	<title>Парсер интернет магазинов</title>
 	<link rel="stylesheet" href="../../../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../../css/styles.css">
 </head>

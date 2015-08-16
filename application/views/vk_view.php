@@ -1,53 +1,40 @@
 <?
-  
+  // подклчение класса users and vk
+  $save_user = new Users();
+  $vk = new Controller_VK();
+  static $VK_APP_ID = "4976017";
+  static $VK_SECRET_CODE = "7SUe2GWNds2mXPRWAuRN";
+
+  print_r($_POST);
  if ($_GET['type']) {
-    switch ($_GET['type']) {
+    $i=1;
+    $file_parser = $_GET['type'];
+    switch ($file_parser) {      
       case 1:
         require_once('application/list_parser/parser_vse_pokormanu.php');        
-      break;  
+      break;
+      case 2:
+        require_once('application/list_parser/parser_flisco.php');
+      break;
     }
-  }
-
-
-
-
-
-// подклчение класса users
-$save_user = new Users();
-//require_once ('../core_parser/parser_vse_pokormanu.php');
-$vk = new Controller_VK();
-
-//var_dump($save_user);
-static $VK_APP_ID = "4976017";
-static $VK_SECRET_CODE = "7SUe2GWNds2mXPRWAuRN";
-
-
-  $code = $_GET['code'];
+  }  
   //переменные в сессии
   if (!isset($_SESSION['access_token'])){
- 
-   $data = $vk->get_data_acsess_token($VK_APP_ID,$VK_SECRET_CODE,$code);  
+  $code = $_GET['code'];
+  $data = $vk->get_data_acsess_token($VK_APP_ID,$VK_SECRET_CODE,$code);  
   $_SESSION['access_token'] =  $data['access_token'] ;
   $_SESSION['vk_id'] = $data['user_id']  ; 
   }
   $access_token =  $_SESSION['access_token'];
   $vk_id =  $_SESSION['vk_id'];
-  
+  //echo $vk_id;
    // echo  $_SESSION['access_token'];
-    $res = file_get_contents("https://api.vk.com/method/users.get?uids=".$vk_id."&access_token=".$access_token."&fields=uid,first_name,last_name,nickname,photo"); 
-    $data = json_decode($res, true);
+  //$user =  $vk->get_user($vk_id,$access_token);  
    // echo "<pre>";
   // print_r($data);
   // echo "</pre>";
- 
-  $user_info = $data['response'][0]; 
-  //  echo "<pre>";
-  // //echo true;
-  // echo "</pre>";
-  $first_name = $user_info['first_name'];
-  $last_name  = $user_info['last_name'];
-  $vk_id = $user_info['uid'];
- // echo $vk_uid;
+  $first_name = $user['first_name'];
+  $last_name  = $user['last_name']; 
   $ip=$_SERVER['REMOTE_ADDR'];
     $data  = array(
       'first_name'  => $first_name,
@@ -55,102 +42,85 @@ static $VK_SECRET_CODE = "7SUe2GWNds2mXPRWAuRN";
       'vk_id'       => $vk_id,
       'ip'          => $ip,
       'access_token'=> $access_token
-    );
-
-  //}else{
-    //echo$_SESSION['access_token']."<br>";
-    $_SESSION['vk_id']."<br>";
-    //echo $vk_id;
-    $access_token=$_SESSION['access_token'];
-    $res = $save_user->save($data);
-    //print_r($res); 
-    
-
-  //}
-
-
-// обращаемся к ВК Api, получаем имя, фамилию и ID пользователя вконтакте
-// метод users.get
-// 
-// 
-  
-  // echo $user_info['first_name']." ".$user_info['last_name']."</br>";
-
-echo "<a href='vk?type=1'>Все по корману</a>";
-
- 
-  
-   
-
-  
-               
+    );               
   
 //выборка альбомов группы
-function get_albums_list($vk_id,$id_group ="NULL"){
-    $albums_list = file_get_contents("https://api.vk.com/method/photos.getAlbums?uids=".$vk_id."&owner_id=-84177783,album_ids"); 
-    $albums_list = json_decode($albums_list, true); 
-     return $albums_list;
-}
-//выбор групп
-function get_groups_list($vk_id = 1, $access_token){
 
-    $groups_list_users = file_get_contents("https://api.vk.com/method/groups.get?user_id=".$vk_id."&extended=1&count=100&access_token={$access_token}"); 
- 
-    $groups_list = json_decode($groups_list_users, true);
+$groups_list = $vk->get_groups_list($vk_id, $access_token);
 
-    return $groups_list;
-}
-$groups_list = get_groups_list($vk_id, $access_token);
+$albums_list = $vk->get_albums_list($vk_id);
+$files = $vk->get_photos();
 
-$albums_list = get_albums_list($vk_id);
-//print_r($groups_list);
- echo "<select>";
-        foreach ($albums_list as $key) {
-          foreach ($key as $key1 => $value) {
-            echo "<option id={$value['aid']}>{$value['title']}</option>";
+// echo "<pre>";
+// print_r($files);
+// echo "</pre>";
+// echo "<pre>";
+// print_r($captions);
+// echo "</pre>";
 
-
-            
-          }
-        }
-  echo "</select>";
-  // echo "<pre>";
-  // print_r($groups_list['response']);
-  // echo "</pre>";
-   echo "<select>";
-        foreach ($groups_list['response'] as $key) {
-          if ($key['is_admin'] == 1 )
-            echo "<option id={$key['gid']}>{$key['name']}</option>";       
-        }
-  echo "</select>";
-function get_photos(){
-  //echo "!!!1!!";
-  $photo = scandir('application/views/image/');
-  //print_r($photo);
-  $photo = array_filter(scandir('application/views/image/'), function($photo) {
-    return !is_dir('application/views/image/'.$photo);
-    });
-  $i=1;
-  foreach($photo as $photos){
-        
-        $photos_arr[$i++] = $photos; 
-  }
-     //print_r($photos_arr);
-  foreach ($photos_arr as $key => $value) {
-
-     $photos_ids['file'.$key] = "@".dirname(__FILE__)."\image\\".$value;
-  }
-    // print_r($photos_arr);
-  return $photos_ids;
-}
 //print_r($captions);
-$files = get_photos();
-//print_r($files);
-$vk->save_photo($files,$captions,$access_token);
+// if(isset($captions)){
+//   $vk->save_photo($files,$captions,$access_token);
+//   unset($captions);
+// }
 
 ?>
 
 
+<div class="row">
+  <div class="col-md-12">
+  <h1>Привет <?=$first_name." ".$last_name?></h1>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Brand</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Link</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Выбор сайта <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="vk?type=1">Все по карману</a></li>
+                <li><a href="vk?type=2">Детская одежда flisco</a></li>               
+              </ul>
+            </li>
+          </ul>
+          <form class="navbar-form navbar-left" action="vse"   role="search">
+            <select class='selectpicker'>
+              <?foreach ($groups_list['response'] as $key) {
+                  if ($key['is_admin'] == 1 )
+                    echo "<option name='groups_id' value='{$key['gid']}'>{$key['name']}</option>";       
+                }
+              ?>
+            </select>
+            <select class='selectpicker'>
+            <?foreach ($albums_list as $key) {
+              foreach ($key as $key1 => $value) {
+                echo "<option name='albums_id' value='{$value['aid']}' >{$value['title']}</option>";               
+              }
+            }
+            ?>
+            </select>
+            <button type="submit" class="btn btn-default">Выбрать</button>
+          </form>
+         
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    
+  </div>
+</div>
 
 
-
+  

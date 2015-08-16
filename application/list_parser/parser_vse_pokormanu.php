@@ -4,8 +4,7 @@
 
 <?
 $vk = new Controller_VK();
-// это для того чтобы скрипт не отвалился через 30 секунд, если вддруг попадется медленный сайт донор
- $access_token = $_SESSION['access_token'];
+$access_token = $_SESSION['access_token'];
 require_once('application/core/core_parser.php');
 
 
@@ -76,7 +75,7 @@ function getBigImage($url,$i=1){
 	 		
 	 	// }
 	 	$price2 = $price2->plaintext;
-	 	echo  'Цена'.trim($price2)."<br>";	 
+	 	echo  'Цена '.trim($price2)."<br>";	 
 	 }else{			
 	 
 	 }
@@ -84,12 +83,13 @@ function getBigImage($url,$i=1){
 	  //вывод состав
 	 
 	 if( count($data->find('#ls0')) ){
-	 	trim($size);
+	 	$size1=array();
 	 	foreach($data->find('#ls0 ul li') as $size) {
-	 		$size = $size->plaintext;
-	  		echo $size." ";
-	  	}	
-		echo '<br>';
+	 		$size1[] = $size->plaintext;
+	  		
+	  	}
+	  	$size2 = implode(" ",$size1);		
+		//echo $size2."<br>";
 		
 	}else{
 	
@@ -116,18 +116,19 @@ function getBigImage($url,$i=1){
 	 }
 	 //Конец 
 	 echo "<br><br>";
-	//$temp_captions ="$url$product_title$size$price2$article";
-	$temp_captions = $product_title.$url.$article.$price2.$size;
-	//print_r($temp_captions);
+	
+	$temp_captions = "$product_title\n\r$url\n\rАртикул: $article\n\rЦена: $price2\n\rРазмер: $size2\n\r$str1\n\r$str2";
+	print_r($temp_captions);
 	
 	
-	return $temp_captions;
+	
 	$data->clear();// подчищаем за собой
 	unset($data);
+	return $temp_captions;
 
 }
 
-function getYandexImages($url,$findpages = true,$i=1,$n=3){
+function getYandexImages($url,$findpages = true,$i=1,$n=15){
 
 	
 	
@@ -141,7 +142,7 @@ function getYandexImages($url,$findpages = true,$i=1,$n=3){
 	
 
 	$data = str_get_html($data);
-	
+	$f=1;
 	// очищаем страницу от лишних данных, это не обязательно, но когда HTML сильно захламлен бывает удобно почистить его, для дальнейшего анализа
 foreach($data->find('script,link,comment') as $tmp)$tmp->outertext = '';
 
@@ -168,7 +169,7 @@ foreach($data->find('script,link,comment') as $tmp)$tmp->outertext = '';
 			
 			$temp_captions = getBigImage($a->href,$i);
 			//echo $temp_captions."<br>";
-			$captions[] = $temp_captions;
+			$captions['file'.$f++] = $temp_captions;
 
 
 			//print_r($captions);
@@ -204,6 +205,7 @@ foreach($data->find('script,link,comment') as $tmp)$tmp->outertext = '';
 	$data->clear();// подчищаем за собой
 	unset($data);
 	//print_r($captions);
+	return $captions;
 	
 }
 // очищение папки 
@@ -238,7 +240,7 @@ function clear_dir($dir)
 
 $files = get_photos();
 //print_r($files);
-print_r($captions);
+//print_r($captions);
 
 
 // поисковый URL
@@ -251,7 +253,7 @@ if (isset($_POST['link'])) {
 	$url =	$_POST['link'] ;
 	clear_dir('application/views/image/');
 	$captions = getYandexImages($url);
-	//print_r($captions);
+
 }
 
 

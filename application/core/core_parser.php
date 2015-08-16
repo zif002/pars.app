@@ -1,7 +1,17 @@
-<form action='vk?type=1' method='post'>
-    <input type='text' name='link'>
-    <button>Парсить</button>
-</form>
+
+
+<div class="col-lg-12">
+    <div class="input-group form">
+    <form action='vk?type=2' method='post' accept-charset="utf8">
+      <input type="text" name="link" class="form-control" placeholder="Вставте ссылку">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit">Парсить</button>
+    
+      </span>
+    </div><!-- /input-group -->
+    </form>
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
 <?
 
 
