@@ -22,6 +22,11 @@ class DB {
        
       }
     }
+    public function getDb() {
+          if ($this->db instanceof PDO) {
+               return $this->db;
+          }
+    }
 
 }
 

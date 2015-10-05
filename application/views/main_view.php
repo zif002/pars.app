@@ -14,7 +14,7 @@
 ?>
 
 <div class="row">
-	<?if (!empty($_POST['user_login'])){?>
+	<?if (!empty($_POST['user_login']) && !empty($_POST['user_pass'])){?>
 	<div class="col-md-6"><a href="<?=$app_id;?>"class="btn btn-success">ОТКРЫТЬ ДОСТУП</a></div>
 	<?}else{?>
 	<div class="col-md-12"><h1>Добро пожаловать в Парсер для жены betta 0.0.0.1!</h1></div>

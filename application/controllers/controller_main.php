@@ -2,9 +2,13 @@
 
 
 class Controller_Main extends Controller{
+    private $db ;
 	 function __construct(){
 		$this->model = new Model_Main();
 		$this->view = new View();
+        $db = new DB();
+        $this->db = $db->getDb();
+
 	}
 
     function action_index(){
@@ -28,7 +32,7 @@ class Controller_Main extends Controller{
     * @return string
     */
     public function generateHashCookie($data){
-        return md5('sdf' . $data . 'sdf');
+        return md5('asdfsdfs' . $data . 'sdkflskjflksdjflskj');
     }
 
     /**
@@ -38,31 +42,33 @@ class Controller_Main extends Controller{
     * @return bool
     */
     public function auth($login, $pass){
-
+        echo $login,$pass;
         if ( !empty( $_COOKIE['uid'] ) && !empty( $_COOKIE['pwd'] ) ) {
             $id = (int)$_COOKIE['uid'];
             $pwd = (string)$_COOKIE['pwd'];
             
-            $query1 = $this->db->prepare("SELECT * FROM users WHERE id=:id");
-            $data = $query1->execute([':id' => $id]);
+            $query1 = $this->db->prepare("SELECT * FROM users WHERE id_vk=:id_vk");
+            $data = $query1->execute([':id_vk' => $id_vk]);
 
+            print_r($data);
             if ( $data && ( $this->generateHashCookie($pwd) == $data['access_token'] ) ) {
                 $_SESSION['user_id'] = $data['id'];
                 return true;
             }
         }
-       var_dump($this);
+       //var_dump($this);
         $query1 = $this->db->prepare("SELECT * FROM users WHERE login=:login");
-
+        
         $data = $query1->execute([':login' => $login]);
-        print_r($data);
+        $data1->$data->fetch(PDO::FETCH_ASSOC);
+        //print_r($data);
 
         if (!$data) {
             return false;
         }
-
-        if ($data['password'] == $this->generatePassword($pass)) {
-
+        print_r($data1['pass']);
+        if ($data['pass'] == $this->generatePassword($pass)) {
+        
         $_SESSION['user_id'] = $data['id'];
 
         // query -> remember_token
