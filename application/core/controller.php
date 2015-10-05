@@ -1,5 +1,5 @@
 <?
-class Controller {
+class Controller{
     
     public $model;
     public $view;
@@ -13,4 +13,5 @@ class Controller {
     {
     	
     }
+  
 }

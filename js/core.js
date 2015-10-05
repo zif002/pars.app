@@ -5,7 +5,7 @@ $(function(){
    		$.ajax({
  
 		    // The URL for the request
-		    url: "../application/core_parser/parser_vse_pokormanu.php",
+		    url: "/application/controller_admin.php",
 		 
 		    // The data to send (will be converted to a query string)
 		    data: link,
@@ -40,10 +40,7 @@ $(function(){
 
 
    });
-		$('.selectpicker').selectpicker({
-	      style: 'btn-info',
-	      size: 4
-	  });
+
 
    
 })

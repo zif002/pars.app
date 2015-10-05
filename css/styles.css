@@ -1,7 +1,20 @@
 .input-group .form-control{
-	width:83%;
+	width:50%;
+
 }
 .form{
 	padding:10px 20px;
 	width:100%;
+}
+.form select{
+	display: block;
+	float: left;
+	margin-right:20px;
+	margin-bottom:20px; 
+}
+.list_parser{
+	margin:5px 0;
+}
+legend{
+	text-align: center;
 }

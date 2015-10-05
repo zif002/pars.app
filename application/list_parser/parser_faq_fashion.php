@@ -19,10 +19,10 @@ function getBigImage($url1,$i=1){
 	// echo "</pre>";
 	
 
-	if( count($data->find('.images a')) ){
+	if( count($data->find('a.MagicZoomPlus')) ){
 		//$img = $data->find('a.fancy-img');
 		//echo $img->href;
-		$img = $data->find('.images a',0);
+		$img = $data->find('a.MagicZoomPlus',0);
 		$img = $img->href;
 		//echo $img;
 		//echo "<img src='$img' width='130' height='130'>";
@@ -50,45 +50,50 @@ function getBigImage($url1,$i=1){
 		$url = $url->id;
 		//echo $url."<br>";
 		//Вывод названия товара
-		 if( count($data->find('h1.product_title')) ){
-			$product_title1 = $data->find('h1.product_title',0);
+		 if( count($data->find('h1')) ){
+			$product_title1 = $data->find('h1',0);
 				$product_title1 =  $product_title1->plaintext;
 				$product_title = trim($product_title1);
 		
 
-			//echo  $product_title."<br>";	
+			echo  $product_title."<br>";	
 			
 			}else{	 
 		}
 		//Вывод ,Артикул
-		//  if( count($data->find('.goods-article')) ){
-		//  	$article =  $data->find('.goods-article',0);
-		//  	$article= $article->plaintext;
-		//  	$article = trim($article);
-		//  	echo  "Артикул: ".$article."<br>";
+		 if( count($data->find('.option')) ){
+		 	$size_temp =  $data->find('.option',0);
+		 	echo  "Размер: ";
+		 	foreach ($size_temp->find('.checkbox label') as $size) {
+		 		$size1[] = $size->plaintext;
+		 		echo $size->plaintext;
+		 	}
+		 	$size2 = implode(" ",$size1);
+		 	echo "<br>";
 		 	
-		//  }else{
+		 	
+		 }else{
 		
-		// }
+		}
 		 
 		//Вывод цены
-		 if(  count($data->find('.price .amount'))){	 		
-		 	$price = $data->find('.price .amount',0);
+		 if(  count($data->find('.price'))){	 		
+		 	$price = $data->find('.price',0);
 			$price = $price->plaintext;
-			$price_length = strlen($price);
-			//echo $price_length."<br>";
-			$price = trim($price);
-			$price = substr($price, 0, -22); 
-		 	//echo  $price."<br>";
+			
+		 	echo  htmlspecialchars($price)."<br>";
 		 }else{			
 		
 		 }		
 		 //   Вывод короткого описания
-	  	if(count($data->find('.entry-content p'))){
-	  		
-	  		$description = $data->find('.entry-content p',0);
-	  		$description = $description->plaintext;
-	  		$description = trim($description);
+	  	if(count($data->find('.tablecolor'))){
+	  		$table = $data->find('.tablecolor',0);
+	  		foreach ($table->find('tr') as $description) {
+	  			$descr[] = str_replace('&quot;','',$description->plaintext);
+	  			echo $description->plaintext."<br>";
+	  		}
+	  		$description = implode("\n\r",$descr);
+	  		//$description = trim($description);
 	  		//echo $description."<br>";
 		}else{			
 		 	
@@ -96,19 +101,17 @@ function getBigImage($url1,$i=1){
 	}
 	 //Конец 
 	echo "<br><br>";
-	$temp_captions = "$product_title1\n\r$url\n\rЦена: $price руб\n\rОписание: $description";
-	$array1=array("&#187;","&#171;");
-	$array2=array(' ',' ');
-	$temp_captions = str_replace($array1,$array2,$temp_captions); 
+	$temp_captions = "$url\n\r$product_title1\n\rЦена: $price\n\rРазмер: $size2\n\r$description\n\r";
+
 	
-	//print_r($temp_captions);
+	print_r($temp_captions);
 	//var_dump($temp_captions);
 	$data->clear();// подчищаем за собой
 	unset($data);
 	return $temp_captions;
 }
 
-function getYandexImages($url,$findpages = true,$i=1,$n=200){
+function getYandexImages($url,$findpages = true,$i=1,$n=3){
 
 	$f=1;
 	$captions = array();
@@ -132,12 +135,12 @@ function getYandexImages($url,$findpages = true,$i=1,$n=200){
 	 // echo "</pre>";
 	//находим URL страниц только для первого вызова функции
 	
-	if( $findpages and count($data->find('li.instock a.button'))){
+	if( $findpages and count($data->find('h3.name a'))){
 		
-		foreach($data->find('li.instock a.button') as $a){	
-		//	$a->href.'<br>';
+		foreach($data->find('h3.name a') as $a){	
+		//$a->href.'<br>';
 			// довольно распространенный случай - локальный URL. Поэтому иногда url надо дополнять до полного
-			if( !preg_match('#^http://#',$a->href) )$a->href = 'http://shop.faberlic.com/'.$a->href;
+			if( !preg_match('#^http://#',$a->href) )$a->href = 'http://faq-fashion.ru/'.$a->href;
 			// и еще дна тонкость, &amp; надо заменять на &
 			$a->href = str_replace('&amp;','&',$a->href);
 			//echo $a->href.'<br>';
@@ -148,7 +151,7 @@ function getYandexImages($url,$findpages = true,$i=1,$n=200){
 			$captions['file'.$f++] = $temp_captions;
 			
 			
-			if($i++>=$n)exit; // завершаем работу если скачали достаточно фотографий
+			if($i++>=$n) return $captions; // завершаем работу если скачали достаточно фотографий
 			// этакий progressbar, будет показывать сколько фотографий уже загружено
 			echo '<script>document.getElementById("counter").innerHTML = "Загружено: '.$i.' из '.$n.' фото";</script>';
 			flush();

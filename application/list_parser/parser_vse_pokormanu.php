@@ -118,7 +118,7 @@ function getBigImage($url,$i=1){
 	 echo "<br><br>";
 	
 	$temp_captions = "$product_title\n\r$url\n\rАртикул: $article\n\rЦена: $price2\n\rРазмер: $size2\n\r$str1\n\r$str2";
-	print_r($temp_captions);
+	//print_r($temp_captions);
 	
 	
 	
@@ -144,7 +144,7 @@ function getYandexImages($url,$findpages = true,$i=1,$n=15){
 	$data = str_get_html($data);
 	$f=1;
 	// очищаем страницу от лишних данных, это не обязательно, но когда HTML сильно захламлен бывает удобно почистить его, для дальнейшего анализа
-foreach($data->find('script,link,comment') as $tmp)$tmp->outertext = '';
+		foreach($data->find('script,link,comment') as $tmp)$tmp->outertext = '';
 
 	 // echo "<pre>";
 	 // print_r($price2);
@@ -170,11 +170,11 @@ foreach($data->find('script,link,comment') as $tmp)$tmp->outertext = '';
 			$temp_captions = getBigImage($a->href,$i);
 			//echo $temp_captions."<br>";
 			$captions['file'.$f++] = $temp_captions;
-
-
-			//print_r($captions);
 			
-			//echo "32<br>";
+
+
+			
+
 			if($i++>=$n) return $captions; // завершаем работу если скачали достаточно фотографий
 			// этакий progressbar, будет показывать сколько фотографий уже загружено
 			//echo '<script>document.getElementById("counter").innerHTML = "Загружено: '.$i.' из '.$n.' фото";</script>';
@@ -188,20 +188,7 @@ foreach($data->find('script,link,comment') as $tmp)$tmp->outertext = '';
 
 	
 	
-	// находим все изображения на странице, а точнее ссылки на них
-	// if(count($data->find('a.product-title'))){
-	// 	foreach($data->find('a.product-title') as $a){
-	// 		//echo $a->href."<br>";
-	// 		if( !preg_match('#^http://#',$a->href) )$a->href = 'http://www.kupivsem.ru'.$a->href;
-	// 		$a->href = str_replace('&amp;','&',$a->href);
-	// 		//echo $a->href."<br>";		
-	// 		getYandexImages($a->href,false);
-			
-	// 		// getPrice($a->href);
-			
-		
-	// 	}
-	// }
+
 	$data->clear();// подчищаем за собой
 	unset($data);
 	//print_r($captions);
@@ -238,9 +225,9 @@ function clear_dir($dir)
     }
 }
 
-$files = get_photos();
-//print_r($files);
-//print_r($captions);
+// $files = get_photos();
+// //print_r($files);
+// //print_r($captions);
 
 
 // поисковый URL

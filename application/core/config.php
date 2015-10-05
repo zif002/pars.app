@@ -1,6 +1,6 @@
 <?
 
-
+ini_set('max_execution_time', 3600);
 class DB {
     private $host = "localhost";
     private $dbname = "pars";
