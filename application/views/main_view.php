@@ -8,13 +8,13 @@
  	if (!empty($_POST['user_login']) && !empty($_POST['user_pass'])){
 		$login = $_POST['user_login'];
 		$pass  = $_POST['user_pass'];
-		echo $login." ".$pass;
+		//echo $login." ".$pass;
 		$get_user = $enter->auth($login,$pass);
 	}
 ?>
 
 <div class="row">
-	<?if (!empty($_POST['user_login']) && !empty($_POST['user_pass'])){?>
+	<?if ($get_user){?>
 	<div class="col-md-6"><a href="<?=$app_id;?>"class="btn btn-success">ОТКРЫТЬ ДОСТУП</a></div>
 	<?}else{?>
 	<div class="col-md-12"><h1>Добро пожаловать в Парсер для жены betta 0.0.0.1!</h1></div>

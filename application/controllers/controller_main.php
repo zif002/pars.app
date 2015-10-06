@@ -57,25 +57,27 @@ class Controller_Main extends Controller{
             }
         }
        //var_dump($this);
-        $query1 = $this->db->prepare("SELECT * FROM users WHERE login=:login");
+        $query1 = $this->db->prepare("SELECT * FROM users WHERE login=:login");        
+        $query1->execute([':login' => $login]);
+       
+        $data=$query1->fetch();
         
-        $data = $query1->execute([':login' => $login]);
-        $data1->$data->fetch(PDO::FETCH_ASSOC);
-        //print_r($data);
 
         if (!$data) {
             return false;
         }
-        print_r($data1['pass']);
+        //echo $this->generatePassword($pass);
+        //print_r($data['pass']);
         if ($data['pass'] == $this->generatePassword($pass)) {
-        
-        $_SESSION['user_id'] = $data['id'];
+        //echo $this->generatePassword($pass);
+        $_SESSION['user_id'] = $data['id_vk'];
 
         // query -> remember_token
 
 
-        setcookie('uid', $data['id'], 86400, '/');
-        setcookie('pwd', $data['remember_token'], 86400, '/');
+        setcookie('uid', $data['id_vk'], 86400, '/');
+        setcookie('pwd', $data['pass'], 86400, '/');
+        print_r($_COOKIE);
 
         return true;
         }

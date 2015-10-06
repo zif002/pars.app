@@ -9,7 +9,7 @@
   static $VK_SECRET_CODE = "7SUe2GWNds2mXPRWAuRN";
   if ($_GET['type']) {
     $type_parser = $_GET['type'];
-    foreach ($list_parser as $parser) {
+    foreach ($data as $parser) {
       if($_GET['type'] == $parser['case']){
         echo "<h1>{$parser['name']}</h1>";
         require_once($parser['path']);
