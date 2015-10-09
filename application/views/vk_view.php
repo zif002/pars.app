@@ -18,17 +18,15 @@
 
     }
    }
-
-
   //переменные в сессии
-  if (!isset($_COOKIE['access_token'])){
+  if (!isset($_SESSION['access_token'])){
     $code = $_GET['code'];
-    $data = $vk->get_data_acsess_token($VK_APP_ID,$VK_SECRET_CODE,$code);  
+    $data_accsess_token = $vk->get_data_acsess_token($VK_APP_ID,$VK_SECRET_CODE,$code);  
     //print_r($data);
-    setcookie("access_token", $data['access_token'],time()+86400);
-    setcookie("vk_id",$data['user_id'],time()+86400); 
-     $access_token = $_COOKIE['access_token'];
-    $user =  $vk->get_user($data['user_id'] , $access_token);
+    
+    $_SESSION['access_token'] = $data_accsess_token['access_token'];
+    $access_token = $_COOKIE['access_token'];
+    $user =  $vk->get_user($data_accsess_token['user_id'] , $access_token);
 
     // echo "<pre>";
     // print_r($user);
@@ -37,7 +35,6 @@
     $first_name = $user['first_name'];
     $last_name  = $user['last_name'];
     //print_r($user);
-    $access_token_time = time();
     $ip=$_SERVER['REMOTE_ADDR'];
       $data_user  = array(
         'first_name'          => $first_name,
@@ -81,7 +78,7 @@ $group_id = $_POST['groups_id'];
 //print_r($captions);
  if(isset($captions)){
   //echo "!!OK!!!";
-$vk->save_photo($files,$captions,$_COOKIE['access_token'],$album_id,$group_id);
+$vk->save_photo($files,$captions,$access_token,$album_id,$group_id);
    unset($captions);
  }
 

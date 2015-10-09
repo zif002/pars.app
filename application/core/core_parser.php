@@ -1,6 +1,6 @@
 <?
 //echo $_COOKIE['access_token'];
-$groups_list = $vk->get_groups_list($vk_id, $_COOKIE['access_token']);
+$groups_list = $vk->get_groups_list($vk_id, $access_token);
 
 $albums_list = $vk->get_albums_list($vk_id);
 
