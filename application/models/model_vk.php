@@ -127,6 +127,26 @@ class Model_VK extends Model{
                 "min"   =>  "6500",
                 "link"  =>  "http://www.trangowear.ru/"
               ],
+              [
+                "case"  => 17,
+                "name"  => "Tоп натур",
+                "path"  =>  "application/list_parser/parser_top_nature.php",
+                "title" => "Кожаные тапки",
+                "min"   =>  "10 000",
+                "link"  =>  "http://top-natur.ru//",
+                "category" => "obuv",
+                "category_name" => "Обувь"
+              ],
+              [
+                "case"  => 18,
+                "name"  => "SUOMA.RU",
+                "path"  =>  "application/list_parser/parser_fin_goods.php",
+                "title" => "Товары из финляндии",
+                "min"   =>  "1000",
+                "link"  =>  "http://suoma.ru/",
+                "category" => "goods",
+                "category_name" => "Товары из финляндии"
+              ]
               
           );
     }

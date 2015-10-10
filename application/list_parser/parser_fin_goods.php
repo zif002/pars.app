@@ -1,18 +1,16 @@
 <?
+
 session_start();
-//echo "Файл подключен<br>";
-$vk = new Controller_VK();
+
 $access_token = $_SESSION['access_token'];
 require_once('application/core/core_parser.php');
-
-
-function getBigImage($url,$i){
+function getBigImage($url,$i=1){
 	$ch = curl_init();  
 	curl_setopt($ch, CURLOPT_URL, $url); 
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_COOKIEJAR, "cookies.txt");
+	curl_setopt ($ch , CURLOPT_USERAGENT , "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36");
 	$data = curl_exec($ch); 
-	curl_close($ch);
+	curl_close($ch);  
 	if(trim($data)=='')return false; // бывает что сайт недоступен, его фото мы не грузим
 	$data = str_get_html($data);
 	// echo "<pre>";
@@ -20,104 +18,75 @@ function getBigImage($url,$i){
 	// echo "</pre>";
 
 
-	// находим фото
+	if( count($data->find('.object_image_a')) ){
+		$img =  $data->find('.object_image_a',0);
 
-
-	if( count($data->find('#prodtable img')) ){
-		$img = $data->find('#prodtable img',0);
-		$img = $img->src;
-
+			 	
+		// }
 		//echo $img;
-	if( !preg_match('#^http://#',$img) )$img = 'http://www.trangowear.ru'.$img;	
-	  	//echo $img;	
+		if( !preg_match('#^http://#',$img->href) )$img->href = 'http://tapki78.nethouse.ru'.$img->href;	
+	  	//echo $img->href;
 	  	$ch = curl_init();  
-		curl_setopt($ch, CURLOPT_URL, $img); 
+		curl_setopt($ch, CURLOPT_URL, $img->href); 
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt ($ch , CURLOPT_USERAGENT , "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36");
 		$imgExt = curl_exec($ch); 
-		//print_r($imgExt);
 		curl_close($ch);  
-		$r_photo = file_put_contents( 'application/views/image/'.$i++.'.jpg', $imgExt);
-		
-		
+		$flag = file_put_contents( 'application/views/image/'.$i++.'.jpg', $imgExt);
+	}else{
+		echo "Нужен другой тег";
 	}
-	if($r_photo){
+	if($flag){
+		echo "Товар № ".$i."<br>";
 		$url = shortUrl($url);
 		$url = $url->id;
-		//var_dump($url);
 		echo $url."<br>";
 		//Вывод названия товара
-		if( count($data->find('h1')) ){
-			$product_title = $data->find('h1',0);
+		 if( count($data->find('.h1_content')) ){
+		 	$product_title = $data->find('.h1_content',0);	
 			$product_title = $product_title->plaintext;
-
-			echo $product_title."<br>";
-			//$product_title = htmlspecialchars($product_title);
-					
-		 }else{
-		 	echo false;
-		 }
-
-		 //Вывод цены
-		 if(count($data->find('.opt'))){
-		 		//echo "<span>Цена в магазине </span>";
-		 	$price = $data->find('.opt',0);
-			$price = $price->plaintext;
-		 	echo  $price."<br>";
+			// $product_title = htmlspecialchars(str_replace('&quot;',' ',$product_title));			
+			echo  $product_title."<br>";			
+			}else{	 
+		}
 		
+		//Вывод цены
+		if(count($data->find('.price_value'))){	 		
+		 	$price = $data->find('.price_value',0);		 
+		 
+		 	$price = $price->plaintext;
+		 	echo  "Цена: ".$price."<br>";
 		 }else{			
 		
-		 }
-	
-		 if( count($data->find('b')) ){
-		 	//echo "Размер ";
-		 	$size1 = array();
-			foreach($data->find('b') as $size) {
-				echo  $size->plaintext." ";	
-				$size1[] = $size->plaintext;
-			}
-			$size_str = implode(" ",$size1);
+		 }	
+		//Вывод ,описание
+		 if( count($data->find('.user-inner')) ){
+		 	$brand = $data->find('.user-inner',0);
+		 	$description =$brand->plaintext;
+		 	echo $description;
+		 	
+		 	
 		 }else{
-		 	
-		 }
 		
+		}
+		 
 	
-		   //Вывод описания
-		  if(count($data->find('#inputes'))){
-		  	$descript = $data->find('#inputes',0);
-		  	//$descript = $descript->plaintext;
-		  //	echo $descript."<br>";
-		  	$descript_arr = array();
-		 	foreach($data->find('#inputes tr') as $descript1) {	
-		 		foreach ($descript1->find('td') as $td) {
-		 			//echo $td->plaintext;
-		 			echo $td->first_child ()->plaintext;
-		 		}
-		 		
-		 		//echo $descript1." ";
-		 		//$descript_arr[] = $descript1;
-
-		 	}
-		 	$descript_str =  implode("\n\r",$descript_arr);
-		 }else{			
-		 	
-		 }
-		 //Конец 
-		// echo "<br><br>";
-
 	}
-	$temp_captions = "$url\n\r$product_title\n\rРазмер: $size_str\n\rЦена: $price\n\r$descript_str\n\r";
+	 //Конец 
+	echo "<br><br>";
 
 	$data->clear();// подчищаем за собой
 	unset($data);
-	//print_r(htmlspecialchars($temp_captions));
+	$temp_captions = "$url\n\r$product_title\n\r$price\n\r$description\n\r";
+	//print_r($temp_captions);
 	return $temp_captions;
+
 }
 
 function getYandexImages($url,$findpages = true,$i=1,$n=3){
-	$f=1;
-	$captions = array();
 	
+
+	$f=1;  
 	// загружаем данный URL
 	$ch = curl_init();  
 	curl_setopt($ch, CURLOPT_URL, $url); 
@@ -130,38 +99,36 @@ function getYandexImages($url,$findpages = true,$i=1,$n=3){
 	$data = str_get_html($data);
 
 	// очищаем страницу от лишних данных, это не обязательно, но когда HTML сильно захламлен бывает удобно почистить его, для дальнейшего анализа
-foreach($data->find('script,link,comment') as $tmp)$tmp->outertext = '';
-
+	foreach($data->find('script,link,comment') as $tmp)$tmp->outertext = '';
+	//echo $data;
 	 // echo "<pre>";
 	 // print_r($price2);
 	 // echo "</pre>";
 	//находим URL страниц только для первого вызова функции
-	if( $findpages and count($data->find('.cattable td[align=center] p'))){
-		foreach($data->find('.cattable td[align=center] p a') as $a){	
-			 //echo $a->href.'<br>';
+	if( $findpages and count($data->find('.object_item'))){
+		foreach($data->find('.object_item') as $a){	
+			//$a->href.'<br>';
 			// довольно распространенный случай - локальный URL. Поэтому иногда url надо дополнять до полного
-			if( !preg_match('#^http://#',$a->href) )$a->href = 'http://www.trangowear.ru'.$a->href;
+			if( !preg_match('#^http://#',$a->href) )$a->href = 'http://suoma.ru/'.$a->href;
 			// и еще дна тонкость, &amp; надо заменять на &
 			$a->href = str_replace('&amp;','&',$a->href);
-			 //echo $a->href.'<br>';
-			// вызываем функцию для каждой страницы
-		
+			//echo $a->href.'<br>';
+			
 			getYandexImages($a->href,false);
 			$temp_captions = getBigImage($a->href,$i);
 			$captions['file'.$f++] = $temp_captions;
 			if($i++>=$n) return $captions; // завершаем работу если скачали достаточно фотографий
 			// этакий progressbar, будет показывать сколько фотографий уже загружено
-			
 			flush();
 		}
-	}	
+	}		
+
 	$data->clear();// подчищаем за собой
 	unset($data);
-	//print_r($captions)
-	//return $captions;
+	return $captions;
 }
-// очищение папки 
 
+// очищение папки
 function myscandir($dir)
 {
     $list = scandir($dir);
@@ -187,10 +154,6 @@ function clear_dir($dir)
         }
     }
 }
-
-
-// поисковый URL
-
 if (isset($_POST['link'])) {
 
 
