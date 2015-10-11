@@ -164,7 +164,7 @@ class Controller_VK extends Controller
                     // print_r($rezult);
                     //  echo "</pre>";
                     $success_save = $rezult['response'];
-                    //print_r($success_save);
+                    print_r($success_save);
                     if(is_array($success_save)){         
                         $photos_id = $success_save['pid'];
                     }
