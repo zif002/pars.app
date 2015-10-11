@@ -56,27 +56,7 @@ function getBigImage($url,$i=1){
 		 	echo  "Цена: ".$price."<br>";
 		 }else{			
 		
-		 }
-		 // if(count($data->find('.item-content'))){	 		
-		 //  	$article = $data->find('.item-content',0);		  
-		 //  	$article = $article->plaintext;
-		 //  	echo  "Артикул: ".$price."<br>";
-		 //  }else{			
-		 
-		 //  }
-		//  if(count($data->find('.size-titles'))){
-		//  	$size1 = array();
-		// 	foreach($data->find('.size-titles .size_text') as $size) {	  	
-		// 			$size = $size->plaintext;
-		// 			$size1[] = $size;
-		// 			echo $size." ";
-		
-		// 	}
-		// 	echo "<br>";
-		// 	$size2 = implode(" ",$size1);
-		// }else{			
-		 	
-		// }
+		 }	
 		//Вывод ,наличие шт
 		 if( count($data->find('.item-tbl')) ){
 		 	$brand = $data->find('.item-tbl',0);
@@ -93,14 +73,7 @@ function getBigImage($url,$i=1){
 		
 		}
 		 
-		//  //   Вывод описания
-	 //  	if(count($data->find('.collorName'))){
-	 //  		$color = $data->find('.collorName',0);
-	 //  		$color = $color->plaintext;
-	 //  		echo $color;
-		// }else{			
-		 	
-		// }
+	
 	}
 	 //Конец 
 	echo "<br><br>";

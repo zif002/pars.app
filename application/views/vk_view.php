@@ -77,8 +77,8 @@
 $album_id = $_POST['albums_id'];
 $group_id = $_POST['groups_id'];
 //print_r($captions);
- if(isset($captions)){
-  //echo "!!OK!!!";
+ if(!empty($captions) && !empty($files) ){
+  echo "!!OK!!!";
 $vk->save_photo($files,$captions,$access_token,$album_id,$group_id);
    unset($captions);
  }
