@@ -22,10 +22,11 @@
   if (!isset($_SESSION['access_token'])){
     $code = $_GET['code'];
     $data_accsess_token = $vk->get_data_acsess_token($VK_APP_ID,$VK_SECRET_CODE,$code);  
-    //print_r($data);
+    //print_r($data_accsess_token);
     
     $_SESSION['access_token'] = $data_accsess_token['access_token'];
-    $access_token = $_COOKIE['access_token'];
+    $access_token =  $_SESSION['access_token'];
+
     $user =  $vk->get_user($data_accsess_token['user_id'] , $access_token);
 
     // echo "<pre>";

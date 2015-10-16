@@ -74,9 +74,7 @@ class Controller_Main extends Controller{
 
         // query -> remember_token
 
-
-        setcookie('uid', $data['id_vk'], 86400, '/');
-        setcookie('pwd', $data['pass'], 86400, '/');
+ 
         print_r($_COOKIE);
 
         return true;
