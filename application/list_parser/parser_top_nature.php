@@ -83,7 +83,7 @@ function getBigImage($url,$i=1){
 
 }
 
-function getYandexImages($url,$findpages = true,$i=1,$n=3){
+function getYandexImages($url,$findpages = true,$i=1,$n=200){
 	
 
 	$f=1;  

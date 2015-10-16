@@ -19,12 +19,12 @@ function getBigImage($url,$i=1){
 
 
 	if( count($data->find('.object_image_a')) ){
-		$img =  $data->find('.object_image_a',0);
+		$img =  $data->find('div.object .object_image .object_image_a',0);
 
 			 	
 		// }
 		//echo $img;
-		if( !preg_match('#^http://#',$img->href) )$img->href = 'http://tapki78.nethouse.ru'.$img->href;	
+		if( !preg_match('#^http://#',$img->href) )$img->href = 'http://suoma.ru/'.$img->href;	
 	  	//echo $img->href;
 	  	$ch = curl_init();  
 		curl_setopt($ch, CURLOPT_URL, $img->href); 
@@ -54,7 +54,7 @@ function getBigImage($url,$i=1){
 		if(count($data->find('.price_value'))){	 		
 		 	$price = $data->find('.price_value',0);		 
 		 
-		 	$price = $price->plaintext;
+		 	$price = $price->plaintext." руб.";
 		 	echo  "Цена: ".$price."<br>";
 		 }else{			
 		

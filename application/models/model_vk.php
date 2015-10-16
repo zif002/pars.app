@@ -146,12 +146,61 @@ class Model_VK extends Model{
                 "link"  =>  "http://suoma.ru/",
                 "category" => "goods",
                 "category_name" => "Товары из финляндии"
+              ],
+              [
+                "case"  => 19,
+                "name"  => "Концелярский базар",
+                "path"  =>  "application/list_parser/parser_conc_goods_1.php",
+                "title" => "Концилярские товары",
+                "min"   =>  "5000",
+                "link"  =>  "http://www.stationerymarket.ru/",
+                "category" => "conc_goods",
+                "category_name" => "Концелярские товары"
+              ],
+              [
+                "case"  => 20,
+                "name"  => "Селл легинс",
+                "path"  =>  "application/list_parser/parser_sellegins.php",
+                "title" => "Одежда",
+                "min"   =>  "10000",
+                "link"  =>  "http://sellleggings.ru/",
+                "category" => "goods",
+                "category_name" => "Легинсы"
+              ],
+              [
+                "case"  => 21,
+                "name"  => "Сатурн",
+                "path"  =>  "application/list_parser/parser_sellegins.php",
+                "title" => "Бытовая химия",
+                "min"   =>  "5000",
+                "link"  =>  "http://saturnhim.ru/",
+                "category" => "chimia",
+                "category_name" => "Химя бытовая"
+              ],
+              [
+                "case"  => 22,
+                "name"  => "Радуга самоцветов",
+                "path"  =>  "application/list_parser/parser_sellegins.php",
+                "title" => "Бижютерия",
+                "min"   =>  "3000",
+                "link"  =>  "http://samotsvet.ru/",
+                "category" => "bijuteria",
+                "category_name" => "Бижютерия"
+              ],
+              [
+                "case"  => 23,
+                "name"  => "Rus podarki",
+                "path"  =>  "application/list_parser/parser_sellegins.php",
+                "title" => "Новогоднее",
+                "min"   =>  "800",
+                "link"  =>  "http://rus-podarki.ru/",
+                "category" => "new-year",
+                "category_name" => "New Year"
               ]
               
           );
     }
-    public function get_data()
-    {	
+    public function get_data(){	
         return array(
             
             array(
@@ -167,40 +216,7 @@ class Model_VK extends Model{
             // todo
         );
     }
-    public function save($data){
-        echo "<pre>";
-        print_r($data);
-        echo "</pre>";
-      $query1 = $this->db->prepare("SELECT * FROM users WHERE id_vk=:id_vk");
-      $res1 = $query1->execute(array(':id_vk' => $data['vk_id']));
-      while($res = $query1->fetch(PDO::FETCH_ASSOC)){
-        $now_date = time();
-          if($res['id_vk'] == $data['vk_id']){
-            if(isset($_COOKIE['access_token'])){                    
-                        $query1 = $this->db->prepare("UPDATE users SET access_token='".$_COOKIE['access_token']."'  WHERE id_vk='".$res['id_vk']."'");
-                        return $query1;
 
-                    
-                }
-          }
-          //echo $res['id_vk'];
-        }
-
-
-      
-      $query = $this->db->prepare("INSERT INTO users (first_name, last_name,id_vk, ip, access_token, time_access_token) VALUES (:first_name, :last_name, :id_vk, :ip, :access_token)");
-     
-         //print_r($data);
-          return $query->execute(array(':first_name'            => $data['first_name'], 
-                                       ':last_name'             => $data['last_name'],
-                                        ':id_vk'                => $data['vk_id'],
-                                        ':ip'                   => $data['ip'],
-                                        ':access_token'     => $data['access_token']
-                       
-
-                                ));    
-
-    }
 
 
   
